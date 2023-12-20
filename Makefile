@@ -6,7 +6,7 @@
 #    By: izperez <izperez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/02 14:42:47 by izperez           #+#    #+#              #
-#    Updated: 2023/11/30 13:30:44 by izperez          ###   ########.fr        #
+#    Updated: 2023/12/13 13:34:29 by izperez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ LIBFT = $(LIBFT_DIR)libft.a
 MLX_DIR = minilibx/
 MLX = $(MLX_DIR)libmlx.a
 
-SRCS = so_long.c
+SRCS = so_long.c map_read.c map_errors.c map_ccheck.c map_validated.c \
+
 HDRS = so_long.h
 
 all: $(NAME)
@@ -43,4 +44,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re $(LIBFT) $(MLX)

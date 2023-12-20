@@ -6,7 +6,7 @@
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 14:42:41 by izperez           #+#    #+#             */
-/*   Updated: 2023/11/30 13:31:04 by izperez          ###   ########.fr       */
+/*   Updated: 2023/12/18 12:46:11 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@ int	main(void)
 	int		x;
 	int		y;
 
+	if (ft_all_validated("./maps/") == 1)
+	{
+		ft_read_map("maps.ber");
+	}
 	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "ventnitaa");
+	win_ptr = mlx_new_window(mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "ventanitaa");
 	y = 0;
 	while (y < WINDOW_HEIGHT)
 	{
@@ -33,4 +37,5 @@ int	main(void)
 		}
 	}
 	mlx_loop(mlx_ptr);
+	close(mlx_ptr);
 }

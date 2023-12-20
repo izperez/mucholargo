@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   pf_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 10:10:07 by izperez           #+#    #+#             */
-/*   Updated: 2023/10/05 15:43:17 by izperez          ###   ########.fr       */
+/*   Created: 2023/12/05 12:03:33 by izperez           #+#    #+#             */
+/*   Updated: 2023/12/05 12:03:58 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+void	pf_putstr(char *str, int *bytes)
 {
-	t_list	*knot;
+	int	i;
 
-	knot = malloc(sizeof (*knot));
-	if (!knot)
-		return (0);
-	knot->content = content;
-	knot->next = 0;
-	return (knot);
+	i = 0;
+	if (!str)
+		str = "(null)";
+	while (str[i] != 0)
+	{
+		pf_putchar(str[i], bytes);
+		i++;
+	}
 }
-
-/* int	main(void)
-{
-	t_list	*lst;
-
-	lst = ft_lstnew("Hola");
-	printf("%s", lst->content);
-}
- */

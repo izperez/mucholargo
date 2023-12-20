@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
+/*   pf_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 10:14:41 by izperez           #+#    #+#             */
-/*   Updated: 2023/10/06 18:53:35 by izperez          ###   ########.fr       */
+/*   Created: 2023/12/05 12:01:15 by izperez           #+#    #+#             */
+/*   Updated: 2023/12/05 12:02:56 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/* static char	ft_count(unsigned int i, char *s)
+//returns a void pointer: %p -> "0x"
+//char: %c
+void	pf_putchar(char c, int	*bytes)
 {
-	return (*s + i);
-} */
-
-void	ft_lstiter(t_list *lst, void (*f)(void *))
-{
-	while (lst)
+	if (*bytes == -1)
+		return ;
+	if ((write(1, &c, 1)) == -1)
 	{
-		f(lst->content);
-		lst = lst->next;
+		*bytes = -1;
+		return ;
 	}
+	*bytes += 1;
 }
-
-/* int	main(void)
-{
-	t_list	**lst;
-	t_list	*node;
-
-	node = "Hola Caracola";
-	lst = &(node);
-	ft_lstiter(lst, ft_count);
-	printf("%s", node);
-} */

@@ -6,7 +6,7 @@
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:03:56 by izperez           #+#    #+#             */
-/*   Updated: 2023/11/30 13:10:39 by izperez          ###   ########.fr       */
+/*   Updated: 2023/12/12 12:06:07 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <unistd.h>
+# include <stdio.h>
 
 # define GNL_BUFSIZE 20
+# define DEC		"0123456789"
+# define HEX_MIN	"0123456789abcdef"
+# define HEX_MAY	"0123456789ABCDEF"
 
 typedef struct s_list
 {
@@ -60,18 +64,15 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
 
-t_list	*ft_lstnew(void *content);
-void	ft_lstadd_front(t_list **lst, t_list *new);
-int		ft_lstsize(t_list *lst);
-t_list	*ft_lstlast(t_list *lst);
-void	ft_lstadd_back(t_list **lst, t_list *new);
-void	ft_lstdelone(t_list *lst, void (*del)(void *));
-void	ft_lstdelone(t_list *lst, void (*del)(void *));
-void	ft_lstclear(t_list **lst, void (*del)(void *));
-void	ft_lstiter(t_list *lst, void (*f)(void *));
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-
 void	ft_free(void *ptr);
 char	*get_next_line(int fd);
+
+int		ft_printf(const char *variable, ...);
+void	pf_putnbr(size_t i, char *base, int *bytes);
+void	pf_isnegative(int i, char *base, int *bytes);
+void	pf_putchar(char c, int	*bytes);
+void	pf_putstr(char *str, int *bytes);
+
+int		issufix(char *str, char *suff);
 
 #endif

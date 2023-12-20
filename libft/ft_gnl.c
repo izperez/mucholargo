@@ -6,11 +6,12 @@
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:00:41 by izperez           #+#    #+#             */
-/*   Updated: 2023/11/30 13:08:16 by izperez          ###   ########.fr       */
+/*   Updated: 2023/12/05 11:40:03 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 static char	*gn_getline(char *line, char *buf)
 {

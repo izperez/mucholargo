@@ -1,40 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_pf.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 09:48:00 by izperez           #+#    #+#             */
-/*   Updated: 2023/10/05 12:12:25 by izperez          ###   ########.fr       */
+/*   Created: 2023/12/05 11:57:11 by izperez           #+#    #+#             */
+/*   Updated: 2023/12/05 11:57:34 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+//print num hex|dec
+void	pf_putnbr(size_t i, char *base, int *bytes)
 {
-	if (lst)
-	{
-		while (lst->next)
-		{
-			lst = lst->next;
-		}
-		return (lst);
-	}
-	return (lst);
+	unsigned int	base_len;
+
+	base_len = ft_strlen(base);
+	if (i < 0)
+		pf_isnegative(i, base, bytes);
+	else if (i / base_len)
+		pf_putnbr(i / base_len, base, bytes);
+	pf_putchar(base[i % base_len], bytes);
 }
-
-/* int	main(void)
-{
-	t_list	**list;
-	t_list	*knot;
-
-	knot = 0;
-	list = &(knot);
-	ft_lstadd_front(list, ft_lstnew("Hola"));
-	ft_lstadd_front(list, ft_lstnew(" que "));
-	ft_lstadd_front(list, ft_lstnew("tal?"));
-	printf("%s", (char *)ft_lstlast(knot)->content);
-	return (0);
-}	 */
