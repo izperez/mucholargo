@@ -6,36 +6,32 @@
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 14:42:41 by izperez           #+#    #+#             */
-/*   Updated: 2023/12/18 12:46:11 by izperez          ###   ########.fr       */
+/*   Updated: 2024/01/11 15:03:37 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(void)
+int	main(int ac, char **av)
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	int		x;
-	int		y;
+	t_game	map;
 
-	if (ft_all_validated("./maps/") == 1)
-	{
-		ft_read_map("maps.ber");
-	}
-	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "ventanitaa");
-	y = 0;
-	while (y < WINDOW_HEIGHT)
-	{
-		y++;
-		x = 0;
-		while (x < WINDOW_WIDTH)
-		{
-			mlx_pixel_put(mlx_ptr, win_ptr, x, y, 0xB45BE1);
-			x++;
-		}
-	}
-	mlx_loop(mlx_ptr);
-	close(mlx_ptr);
+	if (ac != 2)
+		return (0);
+	//ft_strchr para comprobar la extension
+	if (!ft_strchr(av[1], '.ber'))
+		ft_print_error(1);
+	//ft_memset para copiar en map
+	ft_memset(&map, 0, sizeof(t_game));
+	//map_reading
+	reading_the_map(&map, av);
+	//check_errors
+	//check_errors(&map);
+	//mlx_init
+	//mlx_new_window
+	//put_images
+	//add_graphics
+	//mlx_key_hook
+	//mlx_hook
+	//mlx_loop
 }

@@ -6,7 +6,7 @@
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 14:42:51 by izperez           #+#    #+#             */
-/*   Updated: 2023/12/20 14:05:27 by izperez          ###   ########.fr       */
+/*   Updated: 2024/01/11 15:21:29 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-// Esto no lo necesito porque el tamaño de la ventana depende del tamaño del mapa
 # define WINDOW_WIDTH	500
 # define WINDOW_HEIGHT	500
 
@@ -35,61 +34,41 @@
 # define KEY_RIGHT 124
 # define KEY_LEFT 123
 
-typedef struct s_moves
-{
-	int	up;
-	int	down;
-	int	right;
-	int	left;
-}			t_moves;
-
-typedef struct s_size
-{
-	int	width;
-	int	height;
-}			t_size;
-
-typedef struct s_pos
-{
-	int	x;
-	int	y;
-}			t_pos;
-
-typedef struct s_player
-{
-	t_pos	*pos;
-}				t_player;
-
-typedef struct s_map
-{
-	char	**matrix;
-	t_size	*size;
-	int		created;
-	int		collect_count;
-}				t_map;
-
-typedef struct s_window
-{
-	void	*mlx;
-	void	*mlx_win;
-	void	*mlx_img;
-}				t_window;
-
 typedef struct s_game
 {
-	t_map		*map;
-	t_player	*s_player;
+	char		**matrix;
+	int			fd;
+	int			created;
+	int			collect_count;
+	int			player_count;
+	int			exit_count;
+	int			x;
+	int			y;
+	int			height;
+	int			width;
+	int			counter;
+
+	void		*floor;
+	void		*wall;
+	void		*collectables;
+	void		*exit;
+	void		*player;
+
+	void		*mlx_win;
+	void		*mlx_img;
 }				t_game;
 
-void	ft_free_matrix(char **matrix);
-char	**ft_read_map(char *mapname);
-int		ft_isextension(char *str, char *ber);
-int		ft_isrectangular(char **map, t_size *size);
-int		ft_around_walls(char **map);
-int		ft_all_validated(char **map);
-void	ft_print_error(int type);
-t_map	ft_create_map(char *matrix);
+//map.c
+int		reading_the_map(t_game *map, char **av);
 
-int		ft_isexpandible(char ***matrix, t_size *size);
+//map_errors.c
+int		check_errors(t_game map);
+int		if_is_around_walls(t_game map);
+
+//map_errors_aux.c
+void	ft_print_error(int type);
+int		ft_horizontal_walls(t_game map);
+int		ft_vertical_walls(t_game map);
+
 
 #endif
