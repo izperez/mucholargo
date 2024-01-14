@@ -6,7 +6,7 @@
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 11:21:13 by izperez           #+#    #+#             */
-/*   Updated: 2024/01/13 09:30:24 by izperez          ###   ########.fr       */
+/*   Updated: 2024/01/14 08:59:08 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ static int	add_line(t_game *map, char *line)
 	char	**tmp;
 
 	i = 0;
-	tmp = malloc(sizeof(char *) * (map->height + 1));
+	if (line == NULL)
+		return (0);
+	tmp = (char **)malloc(sizeof(char *) * (map->height + 1));
 	if (tmp == NULL)
 		return (0);
 	tmp[map->height] = NULL;
-	while (line[i] != '\0')
+	while (i < map->height - 1)
 	{
 		tmp[i] = map->matrix[i];
 		i++;
@@ -78,11 +80,11 @@ int	ft_exit(t_game *map)
 	int	line;
 
 	line = 0;
-	if (map->mlx_win)
-		mlx_destroy_window(map->mlx_img, map->mlx_win);
-	free (map->mlx_img);
+	if (map->win_ptr)
+		mlx_destroy_window(map->mlx_ptr, map->win_ptr);
+	free (map->mlx_ptr);
 	while (line < map->height - 1)
 		free (map->matrix[line++]);
 	free(map->matrix);
-	exit (0);
+	exit(0);
 }
