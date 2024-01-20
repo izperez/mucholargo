@@ -6,7 +6,7 @@
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 14:42:51 by izperez           #+#    #+#             */
-/*   Updated: 2024/01/11 15:21:29 by izperez          ###   ########.fr       */
+/*   Updated: 2024/01/20 09:50:18 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,27 @@ typedef struct s_game
 	void		*exit;
 	void		*player;
 
-	void		*mlx_win;
-	void		*mlx_img;
+	void		*mlx_ptr;
+	void		*win_ptr;
 }				t_game;
 
 //map.c
 int		reading_the_map(t_game *map, char **av);
+int		ft_exit(t_game *map);
 
 //map_errors.c
-int		check_errors(t_game map);
-int		if_is_around_walls(t_game map);
+void	check_errors(t_game *map);
 
 //map_errors_aux.c
 void	ft_print_error(int type);
-int		ft_horizontal_walls(t_game map);
-int		ft_vertical_walls(t_game map);
+int		ft_horizontal_walls(t_game *map);
+int		ft_vertical_walls(t_game *map);
 
+//map_images.c
+void	ft_put_images(t_game *map);
+void	ft_add_to_win(t_game *map);
+
+//map_hooks.c
+void	ft_hook(int key, t_game *map);
 
 #endif

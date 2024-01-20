@@ -6,7 +6,7 @@
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 10:45:24 by izperez           #+#    #+#             */
-/*   Updated: 2024/01/14 10:56:04 by izperez          ###   ########.fr       */
+/*   Updated: 2024/01/20 09:26:21 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ static void	count_checker(t_game *map, int width, int height)
 	}
 	if (map->matrix[height][width] == 'P')
 		map->player_count++;
-	else if (map->matrix[height][width] == 'E')
+	if (map->matrix[height][width] == 'E')
 		map->exit_count++;
-	else if (map->matrix[height][width] == 'C')
+	if (map->matrix[height][width] == 'C')
 		map->collect_count++;
 }
 
 //checks if there is a valid char
 //1 player = 1, 1 exit = 1, <= 1 collectable
-static int	character_valid(t_game *map)
+static void	character_valid(t_game *map)
 {
 	int	height;
 	int	width;
@@ -51,45 +51,32 @@ static int	character_valid(t_game *map)
 		}
 		height++;
 	}
-	printf("player: %d", map->player_count);
-	printf("exit: %d", map->exit_count);
-	printf("collec: %d", map->collect_count);
 	if (!(map->player_count == 1 && map->exit_count == 1 \
 		&& map->collect_count > 1))
 	{
 		ft_print_error(4);
 		ft_exit(map);
 	}
-	return (1);
 }
 
 //checks if the map is surrounded by walls
 //if not, prints error
-static int	if_is_around_walls(t_game *map)
+static void	if_is_around_walls(t_game *map)
 {
 	int	horizontal_walls;
 	int	vertical_walls;
 
 	horizontal_walls = ft_horizontal_walls(map);
 	vertical_walls = ft_vertical_walls(map);
-	if (!(horizontal_walls && vertical_walls))
+	if (!(horizontal_walls || vertical_walls))
 	{
 		ft_print_error(2);
 		ft_exit(map);
 	}
-	return (1);
 }
 
 void	check_errors(t_game *map)
 {
-	if (if_is_around_walls(map) == 0)
-	{
-		ft_print_error(2);
-		ft_exit(map);
-	}
-	else if (character_valid(map) == 0)
-	{
-		ft_print_error(3);
-		ft_exit(map);
-	}
+	if_is_around_walls(map);
+	character_valid(map);
 }

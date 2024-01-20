@@ -6,7 +6,7 @@
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 15:16:57 by izperez           #+#    #+#             */
-/*   Updated: 2024/01/14 09:39:53 by izperez          ###   ########.fr       */
+/*   Updated: 2024/01/20 09:31:12 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,15 @@ void	ft_print_error(int type)
 int	ft_horizontal_walls(t_game *map)
 {
 	int	i;
+	int	j;
 
-	i = 0;
-	while (map->width > i)
+	i = map->width;
+	j = 0;
+	while (j > i)
 	{
-		if (map->matrix[0][i] != '1' && map->matrix[map->height - 1][i] != '1')
+		if (map->matrix[0][i] == '1' && map->matrix[map->height - 1][j] == '1')
 			return (0);
-		i++;
+		j++;
 	}
 	return (1);
 }
@@ -48,14 +50,17 @@ int	ft_horizontal_walls(t_game *map)
 //vertical walls check, checks the first and last column
 int	ft_vertical_walls(t_game *map)
 {
-	int	i;
+	int	height;
+	int	width;
 
-	i = 0;
-	while (map->height > i)
+	height = 0;
+	width = map->width;
+	while (map->height > height)
 	{
-		if (map->matrix[i][0] != '1' && map->matrix[i][0] != '1')
+		if (map->matrix[height][0] == '1' && \
+			map->matrix[height][map->width] == '1')
 			return (0);
-		i++;
+		height++;
 	}
 	return (1);
 }

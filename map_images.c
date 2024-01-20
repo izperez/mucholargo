@@ -6,7 +6,7 @@
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 11:01:23 by izperez           #+#    #+#             */
-/*   Updated: 2024/01/13 11:00:34 by izperez          ###   ########.fr       */
+/*   Updated: 2024/01/20 09:46:26 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	ft_add_images_aux(t_game *map, int height, int width)
 }
 
 /* place walls, floor, player, collectable and ext images into mlx_window */
-void	ft_add_images(t_game *map)
+void	ft_add_to_win(t_game *map)
 {
 	int	height;
 	int	width;
