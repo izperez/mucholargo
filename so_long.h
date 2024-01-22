@@ -6,7 +6,7 @@
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 14:42:51 by izperez           #+#    #+#             */
-/*   Updated: 2024/01/20 09:50:18 by izperez          ###   ########.fr       */
+/*   Updated: 2024/01/22 12:51:55 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,14 @@ void	check_errors(t_game *map);
 void	ft_print_error(int type);
 int		ft_horizontal_walls(t_game *map);
 int		ft_vertical_walls(t_game *map);
+int		ft_checking(t_game *map, int i, int j);
 
 //map_images.c
 void	ft_put_images(t_game *map);
 void	ft_add_to_win(t_game *map);
 
 //map_hooks.c
-void	ft_hook(int key, t_game *map);
+int		ft_hook(int key, t_game *map);
+int		right_move(t_game *map, int i, int j);
 
 #endif

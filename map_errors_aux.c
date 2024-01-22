@@ -6,7 +6,7 @@
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 15:16:57 by izperez           #+#    #+#             */
-/*   Updated: 2024/01/20 09:31:12 by izperez          ###   ########.fr       */
+/*   Updated: 2024/01/22 13:07:07 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	ft_print_error(int type)
 	else if (type == 4)
 		ft_printf (ERROR "\033[30m Either player, exit or collectable issue");
 	else if (type == 5)
-		ft_printf ("**Error**\n ");
+		ft_printf ("\033[30m CONGRATULATIONS!!!");
 	else if (type == 6)
-		ft_printf ("Error\n ");
+		ft_printf ("\033[30m Map is not rectangular");
 }
 
 //horizontal walls check, checks the first and last line
@@ -62,5 +62,17 @@ int	ft_vertical_walls(t_game *map)
 			return (0);
 		height++;
 	}
+	return (1);
+}
+
+int	ft_checking(t_game *map, int i, int j)
+{
+	int	check;
+
+	if (map->matrix[j][i] == '1')
+		return (0);
+	check = right_move(map, i, j);
+	if (check == 0)
+		return (0);
 	return (1);
 }

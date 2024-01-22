@@ -6,11 +6,17 @@
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 10:45:24 by izperez           #+#    #+#             */
-/*   Updated: 2024/01/20 09:26:21 by izperez          ###   ########.fr       */
+/*   Updated: 2024/01/22 13:12:24 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+static void	ft_is_rectangular(t_game *map)
+{
+	if (ft_horizontal_walls(map) == 0)
+		ft_print_error(6);
+}
 
 //si el programa no ha terminado después de checkear si hay un carácter válido,
 //vuelve a llamar a la matriz para contar los respectivos chars que queremos.
@@ -77,6 +83,7 @@ static void	if_is_around_walls(t_game *map)
 
 void	check_errors(t_game *map)
 {
+	ft_is_rectangular(map);
 	if_is_around_walls(map);
 	character_valid(map);
 }

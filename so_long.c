@@ -6,7 +6,7 @@
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 14:42:41 by izperez           #+#    #+#             */
-/*   Updated: 2024/01/14 08:56:02 by izperez          ###   ########.fr       */
+/*   Updated: 2024/01/22 12:29:43 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	main(int ac, char **av)
 	map.mlx_ptr = mlx_init();
 	map.win_ptr = mlx_new_window(map.mlx_ptr, map.width * WINDOW_WIDTH, \
 	map.height * WINDOW_HEIGHT, "solog");
-	//ft_put_images(&map);
-	//ft_add_images(&map);
-	//mlx_key_hook
-	//mlx_hook
-	//mlx_loop
+	ft_put_images(&map);
+	ft_put_images(&map);
+	mlx_key_hook(map.win_ptr, ft_hook, &map);
+	mlx_hook(map.win_ptr, 17, 0, (void *)exit, 0);
+	mlx_loop(map.mlx_ptr);
 }

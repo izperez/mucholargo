@@ -6,7 +6,7 @@
 #    By: izperez <izperez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/02 14:42:47 by izperez           #+#    #+#              #
-#    Updated: 2024/01/20 09:24:41 by izperez          ###   ########.fr        #
+#    Updated: 2024/01/22 12:54:51 by izperez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBFT = $(LIBFT_DIR)libft.a
 MLX_DIR = minilibx/
 MLX = $(MLX_DIR)libmlx.a
 
-SRCS = so_long.c  map.c map_errors.c map_errors_aux.c \
+SRCS = so_long.c  map.c map_errors.c map_errors_aux.c map_images.c map_hooks.c\
 
 HDRS = so_long.h
 
