@@ -6,7 +6,7 @@
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 14:42:51 by izperez           #+#    #+#             */
-/*   Updated: 2024/01/22 12:51:55 by izperez          ###   ########.fr       */
+/*   Updated: 2024/01/26 12:54:38 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@
 # define KEY_RIGHT 124
 # define KEY_LEFT 123
 
+typedef struct s_pos
+{
+	int	x;
+	int	y;
+}			t_pos;
+
 typedef struct s_game
 {
 	char		**matrix;
@@ -58,6 +64,9 @@ typedef struct s_game
 	void		*win_ptr;
 }				t_game;
 
+//so_long.c
+void	ft_print_map(char **map);
+
 //map.c
 int		reading_the_map(t_game *map, char **av);
 int		ft_exit(t_game *map);
@@ -70,6 +79,10 @@ void	ft_print_error(int type);
 int		ft_horizontal_walls(t_game *map);
 int		ft_vertical_walls(t_game *map);
 int		ft_checking(t_game *map, int i, int j);
+void	count_checker(t_game *map, int width, int height);
+
+//map_flood_fill.c
+void			flood_fill(t_game *map);
 
 //map_images.c
 void	ft_put_images(t_game *map);

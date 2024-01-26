@@ -6,7 +6,7 @@
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 10:45:24 by izperez           #+#    #+#             */
-/*   Updated: 2024/01/22 13:12:24 by izperez          ###   ########.fr       */
+/*   Updated: 2024/01/26 13:11:54 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,22 @@
 
 static void	ft_is_rectangular(t_game *map)
 {
-	if (ft_horizontal_walls(map) == 0)
-		ft_print_error(6);
-}
+	int	first_row;
+	int	i;
+	int	cmp_row;
 
-//si el programa no ha terminado después de checkear si hay un carácter válido,
-//vuelve a llamar a la matriz para contar los respectivos chars que queremos.
-static void	count_checker(t_game *map, int width, int height)
-{
-	if (map->matrix[height][width] != 'P' || \
-		map->matrix[height][width] != 'E' || \
-		map->matrix[height][width] != 'C' || \
-		map->matrix[height][width] != '1' || \
-		map->matrix[height][width] != '0')
+	i = 0;
+	first_row = ft_strlen(map->matrix[0]);
+	while (i < map->height)
 	{
-		ft_print_error(3);
-		ft_exit(map);
+		cmp_row = ft_strlen(map->matrix[i]);
+		if (first_row != cmp_row)
+		{
+			ft_print_error(6);
+			ft_exit(map);
+		}
+		i++;
 	}
-	if (map->matrix[height][width] == 'P')
-		map->player_count++;
-	if (map->matrix[height][width] == 'E')
-		map->exit_count++;
-	if (map->matrix[height][width] == 'C')
-		map->collect_count++;
 }
 
 //checks if there is a valid char
@@ -47,18 +40,18 @@ static void	character_valid(t_game *map)
 	int	width;
 
 	height = 0;
-	while (height < map->height - 1)
+	while (height < map->height)
 	{
 		width = 0;
-		while (width <= map->width)
+		while (width < map->width)
 		{
 			count_checker(map, height, width);
 			width++;
 		}
 		height++;
 	}
-	if (!(map->player_count == 1 && map->exit_count == 1 \
-		&& map->collect_count > 1))
+	if ((map->player_count != 1 || map->exit_count != 1 \
+		|| map->collect_count < 1))
 	{
 		ft_print_error(4);
 		ft_exit(map);
@@ -72,9 +65,9 @@ static void	if_is_around_walls(t_game *map)
 	int	horizontal_walls;
 	int	vertical_walls;
 
-	horizontal_walls = ft_horizontal_walls(map);
 	vertical_walls = ft_vertical_walls(map);
-	if (!(horizontal_walls || vertical_walls))
+	horizontal_walls = ft_horizontal_walls(map);
+	if (horizontal_walls == 0 || vertical_walls == 0)
 	{
 		ft_print_error(2);
 		ft_exit(map);
@@ -86,4 +79,5 @@ void	check_errors(t_game *map)
 	ft_is_rectangular(map);
 	if_is_around_walls(map);
 	character_valid(map);
+	flood_fill(map);
 }

@@ -6,7 +6,7 @@
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 11:21:13 by izperez           #+#    #+#             */
-/*   Updated: 2024/01/22 12:12:23 by izperez          ###   ########.fr       */
+/*   Updated: 2024/01/26 11:13:31 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,30 @@ static int	width_map(char *str)
 //add the line to the matrix
 //if the matrix is not empty, free it
 //returns 1 if everything is ok
-static int	add_line(t_game *map, char *line)
+static int	add_line(t_game *map, char *line, int iter)
 {
 	int		i;
 	char	**tmp;
+	size_t	len;
 
 	i = 0;
 	if (line == NULL)
 		return (0);
-	tmp = (char **)malloc(sizeof(char *) * (map->height + 1));
+	len = ft_strlen(line);
+	if (len > 0 && line[len - 1] == '\n')
+		line[len - 1] = '\0';
+	map->height++;
+	tmp = (char **)malloc(sizeof(char *) * (iter + 1));
 	if (tmp == NULL)
 		return (0);
-	tmp[map->height] = NULL;
-	while (i < map->height - 1)
+	tmp[iter] = NULL;
+	while (i < iter)
 	{
 		tmp[i] = map->matrix[i];
 		i++;
 	}
 	tmp[i] = line;
-	if (map->matrix != NULL)
-		free(map->matrix);
+	tmp[i + 1] = NULL;
 	map->matrix = tmp;
 	return (1);
 }
@@ -58,18 +62,21 @@ static int	add_line(t_game *map, char *line)
 int	reading_the_map(t_game *map, char **av)
 {
 	char	*readmap;
+	int		i;
 
+	i = 0;
 	map->fd = open(av[1], O_RDONLY);
 	if (map->fd == -1)
 		return (0);
 	while (1)
 	{
 		readmap = get_next_line(map->fd);
-		if (!add_line(map, readmap))
+		if (!add_line(map, readmap, i))
 			break ;
-		printf ("%s\n", readmap);
+		i++;
 	}
 	close (map->fd);
+	map->height = i;
 	map->width = width_map(map->matrix[0]);
 	return (1);
 }
